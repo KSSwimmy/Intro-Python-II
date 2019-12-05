@@ -1,4 +1,6 @@
 from room import Room
+from item import Item
+from player import Player
 
 # Declare all the rooms
 
@@ -35,10 +37,11 @@ room['treasure'].s_to = room['narrow']
 
 #
 # Main
-#
+
+
 
 # Make a new player object that is currently in the 'outside' room.
-
+player = Player("Tim", currentRoom = room["outside"] )
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +52,26 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+input_key = input("[N] North, [S] South, [E] East, [W] West, [Q] Quit, [Y] Yes, [N] No")
+
+while True: 
+    if input_key == "N" and hasattr(player.currentRoom, "n_to"): 
+        print("\nCurrent room:", {player.currentRoom})
+        player.currentRoom = player.room.n_to
+
+    elif input_key == "S" and hasattr(player.currentRoom, "s_to"):
+        print("\nCurrent room:", {player.currentRoom})
+        player.currentRoom = player.room.s_to
+
+
+    #The option of leaving the game
+    elif input_key == "Q":
+        print("Are you sure you want to leave?")
+
+    elif input_key == "N":
+        player.currentRoom = player.currentRoom
+
+    elif input_key == "Y":
+        print("See you later! Goodbye!")
+        break 
